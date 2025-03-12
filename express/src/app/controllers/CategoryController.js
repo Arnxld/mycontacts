@@ -7,7 +7,7 @@ class CategoryController {
 
     const categories = await CategoriesRepository.findAll(orderBy)
 
-    response.json(categories)
+    response.status(201).json(categories)
   }
 
 

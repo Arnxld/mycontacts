@@ -8,6 +8,7 @@ import Modal from "../../components/Modal";
 import arrow from '../../assets/images/icons/arrow.svg'
 import edit from '../../assets/images/icons/edit.svg'
 import trash from '../../assets/images/icons/trash.svg'
+import ContactsService from "../../services/ContactsService";
 
 
 export default function Home() {
@@ -27,8 +28,8 @@ export default function Home() {
       try {
         setIsLoading(true)
 
-        const response = await fetch(`http://localhost:3000/contacts?orderBy=${orderBy}`)
-        const json = await response.json()
+        const contactsList = await ContactsService.listContacts(orderBy)
+
         setContacts(json)
         setIsLoading(false)
       }
