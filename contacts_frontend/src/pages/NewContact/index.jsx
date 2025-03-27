@@ -13,7 +13,6 @@ export default function NewContact() {
       email: formData.email,
       phone: formData.phone,
       category_id: formData.categoryId
-
     }
 
     const response = await ContactsService.createContact(contact)
