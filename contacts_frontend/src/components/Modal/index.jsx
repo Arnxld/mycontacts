@@ -3,31 +3,41 @@ import {createPortal} from 'react-dom'
 
 import Button from '../Button'
 
-export default function Modal({ $danger=false }) {
+export default function Modal({
+  cancelLabel='Cancelar',
+  confirmLabel='Confirmar',
+  danger,
+  title,
+  children,
+  onCancel,
+  onConfirm,
+  visible,
+  isLoading=false
+}) {
+  if (!visible) {
+    return
+  }
+
   return createPortal(
     <Overlay>
       <Container danger={$danger}>
-        <h1>titulo do modal</h1>
-        <p>
-          corpo do modal
-        </p>
+        <h1>{title}</h1>
+
+        <div className="modal-body">
+          {children}
+        </div>
 
         <Footer>
-          <button type="button" className="cancel-button">
-            Cancelar
+          <button type="button" className="cancel-button" onClick={onCancel} disabled={isLoading}>
+            {cancelLabel}
           </button>
-          <Button type="button">
-            Deletar
+          <Button type="button" onClick={onConfirm} danger={danger} isLoading={isLoading}>
+            {confirmLabel}
           </Button>
         </Footer>
       </Container>
     </Overlay>,
     document.getElementById('modal-root')
-
   )
-
-
-
-
 }
 
